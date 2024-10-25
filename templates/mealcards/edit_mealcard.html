@@ -1,0 +1,57 @@
+<div class="modal fade" id="editMealCardModal{{ mealcard.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 text-center">Edit MealCard</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+            <form action="{% url 'edit-mealcard' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <input type="number" name="mealcard_id" id="mealcard_id" value="{{ mealcard.id }}" hidden readonly required />
+                  <div class="row mb-2">
+                    <div class="col">
+                        <label for="exampleInputPassword1" class="form-label fw-bold">MealCard Number</label>
+                            <input type="text" class="form-control" id="card_number" name="card_number" value="{{ mealcard.card_number }}" required />
+                        </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col">
+                      <label for="exampleInputPassword1" class="form-label fw-bold">Month</label>
+                      <select class="form-select" id="month" name="month">
+                        <option value="{{mealcard.month}}">{{mealcard.month}}</option>
+                        {% for month in months %}
+                            {% if month != mealcard.month %}
+                                <option value="{{month}}">{{month}}</option>
+                            {% endif %}
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <div class="col">
+                        <label for="exampleInputPassword1" class="form-label fw-bold">Year</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="year"
+                          name="year"
+                          value="{{ mealcard.year }}"
+                          required
+                        />
+                      </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col">
+                        <label class="form-label fw-bold">Expiry Date</label>
+                        <input type="date" class="form-control" name="expiry_date" id="expiry_date" value="{{mealcard.expiry_date|date:'Y-m-d'}}" />
+                    </div>
+                </div>     
+                <div class="text-center mt-2">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+              </form>
+      </div>
+    </div>
+  </div>
