@@ -36,6 +36,30 @@ def new_hostel(request):
     return render(request, "hostels/new_hostel.html")
 
 
+def edit_hostel(request):
+    if request.method == "POST":
+        id = request.POST.get("id")
+        name = request.POST.get("name")
+        rooms = request.POST.get("rooms")
+        capacity = request.POST.get("capacity")
+
+        hostel = Hostel.objects.get(id=id)
+        hostel.name = name
+        hostel.rooms = rooms
+        hostel.capacity = capacity
+        hostel.save()
+        return redirect("hostels")
+    return render(request, "hostels/edit_hostel.html")
+
+
+def delete_hostel(request):
+    if request.method == "POST":
+        id = request.POST.get("hostel_id")
+        Hostel.objects.get(id=id).delete()
+        return redirect("hostels")
+    return render(request, "hostels/delete_hostel.html")
+
+
 def hostel_bookings(request):
     bookings = Booking.objects.annotate(
         is_pending=Case(
@@ -186,5 +210,15 @@ def new_hostel_room(request):
         room_capacity = request.POST.get("room_capacity")
 
         HostelRoom.objects.create(hostel_id=hostel, room_number=room_number, room_capacity=room_capacity)
-
+        
+        return redirect("hostel-rooms")
     return render(request, "hostels/rooms/new_room.html")
+
+
+def delete_hostel_room(request):
+    if request.method == "POST":
+        room_id = request.POST.get("room_id")
+        room = HostelRoom.objects.get(id=room_id)
+        room.delete()
+        return redirect("hostel-rooms")
+    return render(request, "hostels/rooms/delete_room.html")

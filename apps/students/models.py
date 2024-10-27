@@ -39,6 +39,8 @@ class Student(AbsoluteBaseModel):
     guardian_name = models.CharField(max_length=255, null=True)
     guardian_phone_number = models.CharField(max_length=255, null=True)
     status = models.CharField(max_length=255, choices=STUDENT_STATUS_CHOICES)
+    room_assigned = models.ForeignKey("hostels.HostelRoom", on_delete=models.CASCADE, null=True)
+    hostel_assigned = models.ForeignKey("hostels.Hostel", on_delete=models.CASCADE, null=True, related_name="hostelstudents")
 
     def __str__(self):
         return (

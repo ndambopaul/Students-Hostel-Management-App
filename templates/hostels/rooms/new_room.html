@@ -8,17 +8,18 @@
             <form action="{% url 'new-hostel-room' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="modal-body">
-                    <div class="row mb-2">
+                    <div class="row mb-3">
                         <div class="col">
                           <label class="form-label fw-bold">Hostel</label>
                           <select class="form-select" id="hostel" name="hostel" required>
+                              <option selected disabled value=""></option>
                               {% for hostel in hostels %}
                                 <option value="{{ hostel.id }}">{{ hostel.name }}</option>
                               {% endfor %}
                             </select>
                         </div> 
                       </div>
-                  <div class="row mb-2">
+                  <div class="row mb-3">
                 <div class="col">
                   <label for="exampleInputPassword1" class="form-label fw-bold">Room Number</label>
                   <input
@@ -30,7 +31,7 @@
                   />
                 </div>
                 </div>
-                <div class="row mb-2">
+                <div class="row mb-3">
                   <div class="col">
                     <label for="exampleInputPassword1" class="form-label fw-bold">Room Capacity</label>
                     <input
