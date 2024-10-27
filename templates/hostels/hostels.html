@@ -44,7 +44,7 @@
               <td>{{hostel.capacity}}</td>
               <td>{{hostel.created_on}}</td>
               <td>
-                <a href="#" class="btn btn-primary btn-sm"><i class="bi bi-eye-fill"></i></a>
+                <a href="{% url 'hostel-details' hostel.id %}" class="btn btn-primary btn-sm"><i class="bi bi-eye-fill"></i></a>
               </td>
               <td><a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editHostelModal{{ hostel.id }}">
                 <i class="bi bi-pencil-square"></i>

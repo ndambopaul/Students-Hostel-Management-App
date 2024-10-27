@@ -13,7 +13,7 @@
         {% csrf_token %}
         <div class="input-group mb-3">
             <div class="col">
-              <input type="text" class="form-control" name="search_text" id="search_text" placeholder="ID Number ...">
+              <input type="text" class="form-control" name="search_text" id="search_text" placeholder="Room Number ...">
             </div>
             <input type="submit" hidden />
           </div>
@@ -46,7 +46,7 @@
               <td>{{room.students_assigned}}</td>
               <td>{{room.status}}</td>
               <td>
-                <a href="#" class="btn btn-primary btn-sm"><i class="bi bi-eye-fill"></i></a>
+                <a href="{% url 'hostel-room-details' room.id %}" class="btn btn-primary btn-sm"><i class="bi bi-eye-fill"></i></a>
               </td>
               <td><a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editRoomModal{{ room.id }}">
                 <i class="bi bi-pencil-square"></i>

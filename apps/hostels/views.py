@@ -10,6 +10,7 @@ from django.db.models import Case, When, Value, IntegerField
 from django.db import transaction
 
 from apps.hostels.models import Booking, HostelRoom, Hostel
+from apps.students.models import Student
 
 number_of_rooms = 4
 
@@ -35,6 +36,17 @@ def new_hostel(request):
         return redirect("hostels")
     return render(request, "hostels/new_hostel.html")
 
+
+def hostel_details(request, id):
+    hostel = Hostel.objects.get(id=id)
+    
+    students = Student.objects.filter(room_assigned__hostel_id=id)
+
+    context = {
+        "hostel": hostel,
+        "students": students,
+    }
+    return render(request, "hostels/hostel_details.html", context)
 
 def edit_hostel(request):
     if request.method == "POST":
@@ -191,6 +203,13 @@ def hostel_rooms(request):
     hostel_rooms = HostelRoom.objects.all()
     hostels = Hostel.objects.all()
     
+    if request.method == "POST":
+        search_text = request.POST.get("search_text")
+        if search_text:
+            hostel_rooms = HostelRoom.objects.filter(
+                Q(room_number__icontains=search_text)
+            )
+    
     paginator = Paginator(hostel_rooms, 10)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
@@ -202,6 +221,16 @@ def hostel_rooms(request):
     
     return render(request, "hostels/rooms/rooms.html", context)
 
+def hostel_room_details(request, id):
+    room = HostelRoom.objects.get(id=id)
+    students = Student.objects.filter(room_assigned_id=id)
+    
+    context = {
+        "room": room,
+        "students": students
+    }
+    
+    return render(request, "hostels/rooms/room_details.html", context)
 
 def new_hostel_room(request):
     if request.method == "POST":

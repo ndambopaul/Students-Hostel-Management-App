@@ -3,185 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking Details</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .status-badge {
-            font-size: 1rem;
-            padding: 0.5rem 1rem;
-        }
-        .action-buttons .btn {
-            min-width: 120px;
-        }
-    </style>
+    <title>Room 101 Details</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-light">
-    <div class="container py-5">
-        <!-- Header Section -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="mb-0">Booking Details</h2>
-            <span class="badge bg-warning status-badge">Pending</span>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Hostel Management</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Rooms</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Students</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Reports</a>
+                    </li>
+                </ul>
+            </div>
         </div>
+    </nav>
 
-        <!-- Main Content -->
-        <div class="row g-4">
-            <!-- Personal Information Card -->
-            <div class="col-12 col-lg-6">
-                <div class="card shadow-sm">
+    <div class="container my-5">
+        <div class="row">
+            <!-- Room Information Card -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
                     <div class="card-header bg-primary text-white">
-                        <h5 class="card-title mb-0">Personal Information</h5>
+                        <h5 class="card-title mb-0">Room 101</h5>
                     </div>
                     <div class="card-body">
-                        <div class="row g-3">
-                            <div class="col-6">
-                                <label class="fw-bold">First Name</label>
-                                <p class="mb-3">John</p>
-                            </div>
-                            <div class="col-6">
-                                <label class="fw-bold">Last Name</label>
-                                <p class="mb-3">Doe</p>
-                            </div>
-                            <div class="col-6">
-                                <label class="fw-bold">Email</label>
-                                <p class="mb-3">john.doe@email.com</p>
-                            </div>
-                            <div class="col-6">
-                                <label class="fw-bold">Gender</label>
-                                <p class="mb-3">Male</p>
-                            </div>
-                            <div class="col-6">
-                                <label class="fw-bold">Phone Number</label>
-                                <p class="mb-3">+254 123 456 789</p>
-                            </div>
-                            <div class="col-6">
-                                <label class="fw-bold">Registration Number</label>
-                                <p class="mb-3">REG123456</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Guardian Information Card -->
-            <div class="col-12 col-lg-6">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-info text-white">
-                        <h5 class="card-title mb-0">Guardian Information</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row g-3">
-                            <div class="col-6">
-                                <label class="fw-bold">Guardian Name</label>
-                                <p class="mb-3">Robert Doe</p>
-                            </div>
-                            <div class="col-6">
-                                <label class="fw-bold">Guardian Phone</label>
-                                <p class="mb-3">+254 987 654 321</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Address Information -->
-                <div class="card shadow-sm mt-4">
-                    <div class="card-header bg-secondary text-white">
-                        <h5 class="card-title mb-0">Address Information</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row g-3">
-                            <div class="col-12">
-                                <label class="fw-bold">Address</label>
-                                <p class="mb-3">123 Main Street</p>
-                            </div>
-                            <div class="col-6">
-                                <label class="fw-bold">City</label>
-                                <p class="mb-3">Nairobi</p>
-                            </div>
-                            <div class="col-6">
-                                <label class="fw-bold">Country</label>
-                                <p class="mb-3">Kenya</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Payment Information Card -->
-            <div class="col-12">
-                <div class="card shadow-sm">
-                    <div class="card-header bg-success text-white">
-                        <h5 class="card-title mb-0">Payment Information</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="fw-bold">M-Pesa Code</label>
-                                <p class="mb-3">MPESA123456</p>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="fw-bold">Amount</label>
-                                <p class="mb-3">KES 50,000.00</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="action-buttons d-flex justify-content-center gap-3 mt-4">
-            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#declineModal">
-                <i class="bi bi-x-circle me-2"></i>Decline
-            </button>
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#approveModal">
-                <i class="bi bi-check-circle me-2"></i>Approve
-            </button>
-        </div>
-
-        <!-- Decline Modal -->
-        <div class="modal fade" id="declineModal" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header bg-danger text-white">
-                        <h5 class="modal-title">Decline Booking</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to decline this booking?</p>
                         <div class="mb-3">
-                            <label class="form-label">Reason for declining</label>
-                            <textarea class="form-control" rows="3" required></textarea>
+                            <i class="fas fa-building me-2"></i>
+                            <strong>Block:</strong> A Block
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-danger">Confirm Decline</button>
+                        <div class="mb-3">
+                            <i class="fas fa-door-open me-2"></i>
+                            <strong>Room Type:</strong> 4-Seater
+                        </div>
+                        <div class="mb-3">
+                            <i class="fas fa-user-friends me-2"></i>
+                            <strong>Current Occupancy:</strong> 3/4
+                        </div>
+                        <div class="mb-3">
+                            <i class="fas fa-bed me-2"></i>
+                            <strong>Furniture:</strong> 4 Beds, 4 Desks
+                        </div>
+                        <div class="mb-3">
+                            <i class="fas fa-temperature-high me-2"></i>
+                            <strong>AC:</strong> Yes
+                        </div>
+                        <div class="mb-3">
+                            <i class="fas fa-broom me-2"></i>
+                            <strong>Last Cleaned:</strong> 2024-10-26
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Approve Modal -->
-        <div class="modal fade" id="approveModal" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header bg-success text-white">
-                        <h5 class="modal-title">Approve Booking</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <!-- Students Table -->
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                        <h5 class="card-title mb-0">Current Residents</h5>
+                        <button class="btn btn-light btn-sm">
+                            <i class="fas fa-plus me-1"></i>Add Student
+                        </button>
                     </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to approve this booking?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-success">Confirm Approval</button>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Student ID</th>
+                                        <th>Name</th>
+                                        <th>Course</th>
+                                        <th>Year</th>
+                                        <th>Check-in Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>STU001</td>
+                                        <td>John Smith</td>
+                                        <td>Computer Science</td>
+                                        <td>2nd Year</td>
+                                        <td>2024-08-01</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info me-1">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>STU002</td>
+                                        <td>Mary Johnson</td>
+                                        <td>Engineering</td>
+                                        <td>3rd Year</td>
+                                        <td>2024-08-02</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info me-1">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>STU003</td>
+                                        <td>David Wilson</td>
+                                        <td>Business</td>
+                                        <td>1st Year</td>
+                                        <td>2024-08-03</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-info me-1">
+                                                <i class="fas fa-edit"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
