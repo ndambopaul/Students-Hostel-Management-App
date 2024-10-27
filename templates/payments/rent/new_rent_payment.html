@@ -8,13 +8,22 @@
             <form action="{% url 'new-rent-payment' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="modal-body">
-                  <div class="row mb-2">
+                  <div class="row mb-3">
                 <div class="col">
+                  <!--
                   <label for="exampleInputPassword1" class="form-label fw-bold">Registration Number</label>
                     <input type="text" class="form-control" id="reg_number" name="reg_number" required />
+                  -->
+                    <label class="form-label fw-bold">Student</label>
+                  <select class="form-select" id="reg_number" name="reg_number">
+                    <option value="">Search and select a student...</option>
+                    {% for student in students %}
+                      <option value="{{ student.registration_number }}">{{ student.registration_number }}: {{student.user.name}}</option>
+                    {% endfor %}
+                  </select>
                 </div>
                 </div>
-                <div class="row mb-2">
+                <div class="row mb-3">
                   <div class="col">
                     <label for="exampleInputPassword1" class="form-label fw-bold">Amount</label>
                     <input
@@ -27,7 +36,7 @@
                   </div>
                 </div>
 
-                <div class="row mb-2">
+                <div class="row mb-3">
                     <div class="col">
                       <label for="exampleInputPassword1" class="form-label fw-bold">Transaction Code</label>
                       <input
@@ -40,7 +49,7 @@
                     </div>
                   </div>
             
-                <div class="row mb-2">
+                <div class="row mb-3">
                     <div class="col">
                         <label class="form-label fw-bold">Month</label>
                         <select class="form-select" id="month" name="month">

@@ -1,5 +1,10 @@
 from django.urls import path
-from apps.payments.views import rent_payments, mealcard_payments, new_rent_payment, new_mealcard_payment
+from apps.payments.views import (
+    rent_payments,
+    mealcard_payments,
+    new_rent_payment,
+    new_mealcard_payment,
+)
 
 urlpatterns = [
     path("rent-payments/", rent_payments, name="rent-payments"),

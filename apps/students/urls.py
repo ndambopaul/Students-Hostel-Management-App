@@ -1,8 +1,18 @@
 from django.urls import path
-from apps.students.views import students, new_student, edit_student, delete_student, meal_cards, edit_mealcard, delete_mealcard
+from apps.students.views import (
+    students,
+    student_details,
+    new_student,
+    edit_student,
+    delete_student,
+    meal_cards,
+    edit_mealcard,
+    delete_mealcard,
+)
 
 urlpatterns = [
     path("", students, name="students"),
+    path("<int:id>/details", student_details, name="student-details"),
     path("new-student/", new_student, name="new-student"),
     path("edit-student/", edit_student, name="edit-student"),
     path("delete-student/", delete_student, name="delete-student"),

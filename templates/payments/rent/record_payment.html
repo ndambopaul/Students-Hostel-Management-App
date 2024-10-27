@@ -1,0 +1,43 @@
+
+    
+        <!-- Modal -->
+        <div class="modal fade" id="searchableModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title">Record Student Payment</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="sampleForm">
+                            <div class="mb-3">
+                                <label class="form-label">Name</label>
+                                <input type="text" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Select Student</label>
+                                <select class="form-select" id="searchableSelect" style="width: 100%;">
+                                    <option value="">Search and select a student...</option>
+                                    {% for student in students %}
+                                        <option value="{{ student.id }}">{{ student.registration_number }} - {{student.user.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Message</label>
+                                <textarea class="form-control" rows="3"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" form="sampleForm">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

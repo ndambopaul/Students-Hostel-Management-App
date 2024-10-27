@@ -7,30 +7,52 @@ from django.contrib import messages
 from apps.students.models import Student, StudentDocument, MealCard
 from apps.users.models import User
 from apps.core.models import UserRole
-months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+]
 
 
 GENDER_CHOICES = ["Male", "Female"]
+
+
 # Create your views here.
 def students(request):
     students = Student.objects.all()
-    
+
     if request.method == "POST":
         search_text = request.POST.get("search_text")
         if search_text:
             students = Student.objects.filter(
-                Q(user__first_name__icontains=search_text) | Q(user__last_name__icontains=search_text) | Q(registration_number__icontains=search_text)
+                Q(user__first_name__icontains=search_text)
+                | Q(user__last_name__icontains=search_text)
+                | Q(registration_number__icontains=search_text)
             )
-    
+
     paginator = Paginator(students, 10)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    
-    context = {
-        "page_obj": page_obj,
-        "gender_choices": GENDER_CHOICES
-    }
+
+    context = {"page_obj": page_obj, "gender_choices": GENDER_CHOICES}
     return render(request, "students/students.html", context)
+
+
+def student_details(request, id):
+    student = Student.objects.get(id=id)
+
+    context = {"student": student}
+    return render(request, "students/student_details.html", context)
 
 
 def new_student(request):
@@ -49,9 +71,9 @@ def new_student(request):
         date_of_birth = request.POST.get("date_of_birth")
 
         user_role = UserRole.objects.get(name="Student")
-        
+
         print(f"Gender: {gender}")
-        
+
         user = User.objects.create(
             first_name=first_name,
             last_name=last_name,
@@ -63,7 +85,7 @@ def new_student(request):
             city=city,
             country=country,
             gender=gender,
-            date_of_birth=date_of_birth
+            date_of_birth=date_of_birth,
         )
 
         student = Student.objects.create(
@@ -71,7 +93,7 @@ def new_student(request):
             registration_number=registration_number,
             guardian_name=guardian_name,
             guardian_phone_number=guardian_phone_number,
-            status="Active"
+            status="Active",
         )
         messages.success(request, "Student created successfully.")
         return redirect("students")
@@ -95,7 +117,7 @@ def edit_student(request):
         date_of_birth = request.POST.get("date_of_birth")
 
         user_role = UserRole.objects.get(name="Student")
-        
+
         student = Student.objects.get(id=student_id)
 
         student.user.first_name = first_name
@@ -127,17 +149,15 @@ def delete_student(request):
         return redirect("students")
     return render(request, "students/delete_student.html")
 
+
 def meal_cards(request):
     meal_cards = MealCard.objects.all().order_by("-created_on")
-    
+
     paginator = Paginator(meal_cards, 7)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    
-    context = {
-        "page_obj": page_obj,
-        "months": months
-    }
+
+    context = {"page_obj": page_obj, "months": months}
     return render(request, "mealcards/mealcards.html", context)
 
 
@@ -148,17 +168,16 @@ def edit_mealcard(request):
         card_number = request.POST.get("card_number")
         month = request.POST.get("month")
         year = request.POST.get("year")
-        
-        
+
         mealcard = MealCard.objects.get(id=mealcard_id)
         mealcard.expiry_date = expiry_date
         mealcard.card_number = card_number
         mealcard.month = month
         mealcard.year = year
         mealcard.save()
-        
+
         return redirect("meal-cards")
-        
+
     return render(request, "mealcards/edit_mealcard.html")
 
 
@@ -168,5 +187,5 @@ def delete_mealcard(request):
         mealcard = MealCard.objects.get(id=mealcard_id)
         mealcard.delete()
         return redirect("meal-cards")
-        
+
     return render(request, "mealcards/delete_mealcard.html")

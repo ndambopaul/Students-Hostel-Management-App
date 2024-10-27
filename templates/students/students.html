@@ -46,7 +46,7 @@
               <td>{{student.user.email}}</td>
               <td>{{student.user.gender}}</td>
               <td>
-                <a href="" class="btn btn-primary btn-sm"><i class="bi bi-eye-fill"></i></a>
+                <a href="{% url 'student-details' student.id %}" class="btn btn-primary btn-sm"><i class="bi bi-eye-fill"></i></a>
               </td>
               <td><a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editStudentModal{{ student.id }}">
                 <i class="bi bi-pencil-square"></i>

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block additional_css %}
+{% endblock additional_css %}
+
+{% block content %}
+<div class="row">
+    <div class="col">
+        <h3>Hostels</h3>
+    </div>
+    <div class="col">
+      <form method="POST">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <div class="col">
+              <input type="text" class="form-control" name="search_text" id="search_text" placeholder="ID Number ...">
+            </div>
+            <input type="submit" hidden />
+          </div>
+      </form>
+    </div>
+    <div class="col">
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newHostelModal">New Hostel</button>
+    </div>
+</div>
+      <div class="table-responsive small">
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Rooms</th>
+              <th scope="col">Capacity</th>
+              <th scope="col">Added On</th>
+              <th scope="col" colspan="2"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for hostel in hostels %}
+            <tr>
+              <td>{{hostel.id}}</td>
+              <td>{{hostel.name}}</td>
+              <td>{{hostel.rooms}}</td>
+              <td>{{hostel.capacity}}</td>
+              <td>{{hostel.created_on}}</td>
+              <td>
+                <a href="#" class="btn btn-primary btn-sm"><i class="bi bi-eye-fill"></i></a>
+              </td>
+              <td><a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editHostelModal{{ hostel.id }}">
+                <i class="bi bi-pencil-square"></i>
+              </a></td>
+              <td><a class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteHostelModal{{ hostel.id }}">
+                <i class="bi bi-trash"></i>
+              </a></td>
+              {% include "hostels/edit_hostel.html" %}
+              {% include "hostels/delete_hostel.html" %}
+            </tr>
+            
+            {% endfor %}
+
+          </tbody>
+        </table>
+        <div>
+       
+        </div>
+      </div>
+{% endblock content %}

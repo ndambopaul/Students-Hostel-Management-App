@@ -7,6 +7,7 @@ from django.db.models import Q
 
 # Create your views here.
 
+
 def user_login(request):
     if request.method == "POST":
         username = request.POST.get("username")

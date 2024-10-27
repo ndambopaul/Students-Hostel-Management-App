@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card mb-4 shadow-sm">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Student Information</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" class="img-thumbnail mb-3">
+                    <!-- Background Circle -->
+                    <circle cx="75" cy="75" r="75" fill="#e9ecef"/>
+                    
+                    <!-- Graduation Cap -->
+                    <path d="M30 65L75 45l45 20-45 20L30 65z" fill="#6c757d"/>
+                    <path d="M75 85v20M60 95h30" stroke="#6c757d" stroke-width="4" fill="none"/>
+                    
+                    <!-- Face -->
+                    <circle cx="75" cy="95" r="25" fill="#6c757d"/>
+                    
+                    <!-- Body -->
+                    <path d="M45 125c0-20 30-15 30-15s30-5 30 15" fill="#6c757d"/>
+                </svg>
+            </div>
+            <div class="col-md-9">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Name:</strong> {{student.user.name}}</p>
+                        <p><strong>Reg. Number:</strong> {{student.registration_number}}</p>
+                        <p><strong>Date of Birth:</strong> {{student.user.date_of_birth}}</p>
+                        <p><strong>Gender:</strong> {{student.user.gender}}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Email:</strong> {{student.user.email}}</p>
+                        <p><strong>Phone Number:</strong> {{student.user.phone_number}}</p>
+                        <p><strong>Address:</strong> {{student.user.address}}</p>
+                        <p><strong>City:</strong> {{student.user.city}}-{{student.user.country}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Guardian Information Card -->
+<div class="card mb-4 shadow-sm">
+    <div class="card-header bg-info text-white">
+        <h4 class="mb-0">Guardian Information</h4>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Guardian Name:</strong> {{student.guardian_name}}</p>
+            </div>
+            <div class="col-md-6">
+                <p><strong>Contact Number:</strong> {{student.guardian_phone_number}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Payment Buttons -->
+<div class="row">
+    <div class="col-md-6">
+        <button type="button" class="btn btn-success btn-lg w-100 mb-3" data-bs-toggle="modal" data-bs-target="#hostelPaymentModal">
+            <i class="bi bi-house-fill me-2"></i>Create Hostel Payment
+        </button>
+    </div>
+    <div class="col-md-6">
+        <button type="button" class="btn btn-warning btn-lg w-100 mb-3" data-bs-toggle="modal" data-bs-target="#mealPaymentModal">
+            <i class="bi bi-cup-hot-fill me-2"></i>Create Meal Payment
+        </button>
+    </div>
+</div>
+
+<!-- Hostel Payment Modal -->
+<div class="modal fade" id="hostelPaymentModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title">Create Hostel Payment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Payment Amount</label>
+                        <input type="number" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Payment Date</label>
+                        <input type="date" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Payment Method</label>
+                        <select class="form-select">
+                            <option>Cash</option>
+                            <option>Card</option>
+                            <option>Bank Transfer</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success">Submit Payment</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Meal Payment Modal -->
+<div class="modal fade" id="mealPaymentModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title">Create Meal Payment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Payment Amount</label>
+                        <input type="number" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Payment Date</label>
+                        <input type="date" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Meal Plan</label>
+                        <select class="form-select">
+                            <option>Monthly Plan</option>
+                            <option>Quarterly Plan</option>
+                            <option>Yearly Plan</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-warning">Submit Payment</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

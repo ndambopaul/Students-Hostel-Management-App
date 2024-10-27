@@ -34,7 +34,7 @@
               <th scope="col">Gender</th>
               <th scope="col">Status</th>
               <th scope="col">Booked On</th>
-              <th scope="col"></th>
+              <th scope="col" colspan="2"></th>
             </tr>
           </thead>
           <tbody>
@@ -48,8 +48,12 @@
               <td>{{booking.status}}</td>
               <td>{{booking.created_on}}</td>
               <td>
-                <a href="" class="btn btn-primary btn-sm"><i class="bi bi-eye-fill"></i></a>
+                <a href="{% url 'booking-details' booking.id %}" class="btn btn-info btn-sm"><i class="bi bi-eye-fill"></i></a>
               </td>
+              <td><a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editBookingModal{{ booking.id }}">
+                <i class="bi bi-pencil-square"></i>
+              </a></td>
+              {% include "hostels/bookings/edit_booking.html" %}
             </tr>
             
             {% endfor %}
