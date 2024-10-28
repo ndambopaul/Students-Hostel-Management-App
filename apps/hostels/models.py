@@ -37,6 +37,11 @@ class HostelRoom(AbsoluteBaseModel):
 
     def status(self):
         return "Fully Booked" if self.fully_booked else "Available"
+    
+    def occupancy(self):
+        amount = (self.students_assigned / self.room_capacity) * 100
+        
+        return f"{amount} %"
 
 
 class Booking(AbsoluteBaseModel):

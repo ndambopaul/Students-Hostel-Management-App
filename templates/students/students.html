@@ -35,6 +35,7 @@
               <th scope="col">Reg. Number</th>
               <th scope="col">Phone</th>
               <th scope="col">Gender</th>
+              <th scope="col">Room</th>
               <th scope="col">Status</th>
               <th scope="col" colspan="3"></th>
             </tr>
@@ -47,6 +48,15 @@
               <td>{{student.registration_number}}</td>
               <td>{{student.user.phone_number}}</td>
               <td>{{student.user.gender}}</td>
+              <td>
+                {% if student.room_assigned %}
+                {{student.room_assigned.room_number}}
+                {% else %}
+                <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editStudentModal{{ student.id }}">
+                  <i class="fas fa-house-user"></i>
+                </a>
+                {% endif %}
+              </td>
               <td>{{student.status}}</td>
               <td>
                 <a href="{% url 'student-details' student.id %}" class="btn btn-primary btn-sm"><i class="bi bi-eye-fill"></i></a>

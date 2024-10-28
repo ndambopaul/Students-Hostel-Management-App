@@ -8,9 +8,10 @@ from apps.students.views import (
     meal_cards,
     edit_mealcard,
     delete_mealcard,
-    
     checkin_students,
 )
+
+from apps.students.uploads.views import upload_students
 
 urlpatterns = [
     path("", students, name="students"),
@@ -23,4 +24,5 @@ urlpatterns = [
     path("delete-mealcard/", delete_mealcard, name="delete-mealcard"),
     
     path("checkin-students/", checkin_students, name="checkin-students"),
+    path("upload-students/", upload_students, name="upload-students"),
 ]

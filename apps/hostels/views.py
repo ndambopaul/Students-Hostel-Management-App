@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 import calendar
 
 from django.shortcuts import render, redirect
-from django.db.models import Q
+from django.db.models import Q, F
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.contrib import messages
@@ -107,7 +107,7 @@ def hostel_bookings(request):
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     
-    rooms = HostelRoom.objects.all()
+    rooms = HostelRoom.objects.filter(students_assigned__lt=F('room_capacity'))
 
     context = {
         "page_obj": page_obj, 
@@ -120,7 +120,7 @@ def hostel_bookings(request):
 def booking_details(request, id):
     booking = Booking.objects.get(id=id)
     
-    rooms = HostelRoom.objects.all()
+    rooms = HostelRoom.objects.filter(students_assigned__lt=F('room_capacity'))
     
     context = {"booking": booking, "rooms": rooms}
     return render(request, "hostels/bookings/booking_details.html", context)
@@ -265,7 +265,7 @@ def approve_booking(request):
 
 
 def hostel_rooms(request):
-    hostel_rooms = HostelRoom.objects.all()
+    hostel_rooms = HostelRoom.objects.all().order_by("-id")
     hostels = Hostel.objects.all()
     
     if request.method == "POST":

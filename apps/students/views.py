@@ -40,7 +40,7 @@ def students(request):
                 | Q(registration_number__icontains=search_text)
             )
 
-    paginator = Paginator(students, 10)
+    paginator = Paginator(students, 8)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
