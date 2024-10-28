@@ -34,8 +34,8 @@
               <th scope="col">Name</th>
               <th scope="col">Reg. Number</th>
               <th scope="col">Phone</th>
-              <th scope="col">Email</th>
               <th scope="col">Gender</th>
+              <th scope="col">Status</th>
               <th scope="col" colspan="3"></th>
             </tr>
           </thead>
@@ -46,8 +46,8 @@
               <td>{{student.user.name}}</td>
               <td>{{student.registration_number}}</td>
               <td>{{student.user.phone_number}}</td>
-              <td>{{student.user.email}}</td>
               <td>{{student.user.gender}}</td>
+              <td>{{student.status}}</td>
               <td>
                 <a href="{% url 'student-details' student.id %}" class="btn btn-primary btn-sm"><i class="bi bi-eye-fill"></i></a>
               </td>

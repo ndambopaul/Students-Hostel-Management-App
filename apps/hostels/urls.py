@@ -15,7 +15,8 @@ from apps.hostels.views import (
     delete_hostel_room,
     hostel_room_details,
     add_student_to_room,
-    remove_student_from_room
+    remove_student_from_room,
+    approve_booking
 )
 
 urlpatterns = [
@@ -28,6 +29,7 @@ urlpatterns = [
     path("bookings/<int:id>/details", booking_details, name="booking-details"),
     path("edit-booking/", edit_booking, name="edit-booking"),
     path("hostel-booking/", bookings_home, name="hostel-booking"),
+    path("approve-booking/", approve_booking, name="approve-booking"),
     path("book-hostel/", book_hostel, name="book-hostel"),
     path("hostel-rooms/", hostel_rooms, name="hostel-rooms"),
     path("hostel-rooms/<int:id>/details/", hostel_room_details, name="hostel-room-details"),

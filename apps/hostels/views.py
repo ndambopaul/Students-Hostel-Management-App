@@ -11,6 +11,9 @@ from django.db import transaction
 
 from apps.hostels.models import Booking, HostelRoom, Hostel
 from apps.students.models import Student
+from apps.payments.models import RentPayment
+from apps.users.models import User
+from apps.core.models import UserRole
 
 number_of_rooms = 4
 
@@ -207,10 +210,56 @@ def book_hostel(request):
     return render(request, "hostels/bookings/book_hostel.html")
 
 
+@transaction.atomic
 def approve_booking(request):
     if request.method == "POST":
         booking_id = request.POST.get("booking_id")
-        room_number = request.POST.get("room_number")
+        room_id = request.POST.get("room_id")
+        
+        booking = Booking.objects.get(id=booking_id)
+        room = HostelRoom.objects.get(id=room_id)
+        
+        user = User.objects.create(
+            first_name=booking.first_name,
+            last_name=booking.last_name,
+            email=booking.email,
+            username=booking.email,
+            role=UserRole.objects.get(name="Student"),
+            phone_number=booking.phone_number,
+            address=booking.address,
+            city=booking.city,
+            country=booking.country,
+            gender=booking.gender,
+        )
+        
+        user.set_password("1234")
+        user.save()
+
+        student = Student.objects.create(
+            user=user,
+            registration_number=booking.registration_number,
+            room_assigned=room,
+            hostel_assigned=room.hostel,
+            guardian_name=booking.guardian_name,
+            guardian_phone_number=booking.guardian_phone_number,
+            status="Pending Check-In"
+        )
+        
+        room.students_assigned += 1
+        room.save()
+        
+        booking.status = "Approved"
+        booking.save()
+        
+        RentPayment.objects.create(
+            student=student,
+            amount=booking.amount,
+            transaction_code=booking.mpesa_code,
+            payment_date=booking.created_on.date()
+        )
+        
+        return redirect("bookings")
+        
 
     return render(request, "hostels/bookings/approve_booking.html")
 

@@ -29,7 +29,7 @@ GENDER_CHOICES = ["Male", "Female"]
 
 # Create your views here.
 def students(request):
-    students = Student.objects.all()
+    students = Student.objects.all().order_by("-created_on")
 
     if request.method == "POST":
         search_text = request.POST.get("search_text")
@@ -189,3 +189,24 @@ def delete_mealcard(request):
         return redirect("meal-cards")
 
     return render(request, "mealcards/delete_mealcard.html")
+
+
+
+def checkin_students(request):
+    students = Student.objects.filter(status="Pending Check-In").order_by("-created_on")
+
+    if request.method == "POST":
+        search_text = request.POST.get("search_text")
+        if search_text:
+            students = Student.objects.filter(
+                Q(user__first_name__icontains=search_text)
+                | Q(user__last_name__icontains=search_text)
+                | Q(registration_number__icontains=search_text)
+            ).filter(status="Pending Check-In").order_by("-created_on")
+
+    paginator = Paginator(students, 10)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    context = {"page_obj": page_obj, "gender_choices": GENDER_CHOICES}
+    return render(request, "students/checkin_out/checkin_students.html", context)

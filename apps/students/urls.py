@@ -8,6 +8,8 @@ from apps.students.views import (
     meal_cards,
     edit_mealcard,
     delete_mealcard,
+    
+    checkin_students,
 )
 
 urlpatterns = [
@@ -19,4 +21,6 @@ urlpatterns = [
     path("meal-cards/", meal_cards, name="meal-cards"),
     path("edit-mealcard/", edit_mealcard, name="edit-mealcard"),
     path("delete-mealcard/", delete_mealcard, name="delete-mealcard"),
+    
+    path("checkin-students/", checkin_students, name="checkin-students"),
 ]

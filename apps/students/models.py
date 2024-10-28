@@ -12,6 +12,7 @@ STUDENT_STATUS_CHOICES = (
     ("Graduated", "Graduated"),
     ("Dropped", "Dropped"),
     ("Suspended", "Suspended"),
+    ("Pending Check-In", "Pending Check-In"),
 )
 months = [
     ("January", "January"),
