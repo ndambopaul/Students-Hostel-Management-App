@@ -40,17 +40,24 @@ def new_hostel(request):
 def hostel_details(request, id):
     hostel = Hostel.objects.get(id=id)
     
-    students = Student.objects.filter(room_assigned__hostel_id=id)
+    hostel_students = Student.objects.filter(room_assigned__hostel_id=id)
+    
+    students = Student.objects.all()
+    
+    paginator = Paginator(hostel_students, 6)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
 
     context = {
         "hostel": hostel,
+        "page_obj": page_obj,
         "students": students,
     }
     return render(request, "hostels/hostel_details.html", context)
 
 def edit_hostel(request):
     if request.method == "POST":
-        id = request.POST.get("id")
+        id = request.POST.get("hostel_id")
         name = request.POST.get("name")
         rooms = request.POST.get("rooms")
         capacity = request.POST.get("capacity")
@@ -223,11 +230,14 @@ def hostel_rooms(request):
 
 def hostel_room_details(request, id):
     room = HostelRoom.objects.get(id=id)
-    students = Student.objects.filter(room_assigned_id=id)
+    room_students = Student.objects.filter(room_assigned_id=id)
+    
+    students = Student.objects.filter(room_assigned=None)
     
     context = {
         "room": room,
-        "students": students
+        "room_students": room_students,
+        "students": students,
     }
     
     return render(request, "hostels/rooms/room_details.html", context)
@@ -251,3 +261,39 @@ def delete_hostel_room(request):
         room.delete()
         return redirect("hostel-rooms")
     return render(request, "hostels/rooms/delete_room.html")
+
+
+def add_student_to_room(request):
+    if request.method == "POST":
+        student_id = request.POST.get("student_id")
+        room_id = request.POST.get("room_id")
+            
+        student = Student.objects.get(id=student_id)
+        room = HostelRoom.objects.get(id=room_id)
+
+        student.room_assigned = room
+        student.save()
+        
+        room.students_assigned += 1
+        room.save()
+        
+        return redirect(f"/hostels/hostel-rooms/{room_id}/details/")
+    return render(request, "hostels/rooms/add_student_to_room.html")
+
+
+def remove_student_from_room(request):
+    if request.method == "POST":
+        student_id = request.POST.get("student_id")
+        room_id = request.POST.get("room_id")
+            
+        student = Student.objects.get(id=student_id)
+        room = HostelRoom.objects.get(id=room_id)
+
+        student.room_assigned = None
+        student.save()
+        
+        room.students_assigned -= 1
+        room.save()
+        
+        return redirect(f"/hostels/hostel-rooms/{room_id}/details/")
+    return render(request, "hostels/rooms/remove_student_from_room.html")

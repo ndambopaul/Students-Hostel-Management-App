@@ -2,6 +2,7 @@ from django.urls import path
 from apps.hostels.views import (
     hostels,
     new_hostel,
+    edit_hostel,
     hostel_details,
     delete_hostel,
     hostel_bookings,
@@ -13,12 +14,15 @@ from apps.hostels.views import (
     new_hostel_room,
     delete_hostel_room,
     hostel_room_details,
+    add_student_to_room,
+    remove_student_from_room
 )
 
 urlpatterns = [
     path("", hostels, name="hostels"),
     path("<int:id>/details", hostel_details, name="hostel-details"),
     path("new-hostel/", new_hostel, name="new-hostel"),
+    path("edit-hostel/", edit_hostel, name="edit-hostel"),
     path("delete-hostel/", delete_hostel, name="delete-hostel"),
     path("bookings/", hostel_bookings, name="bookings"),
     path("bookings/<int:id>/details", booking_details, name="booking-details"),
@@ -29,4 +33,6 @@ urlpatterns = [
     path("hostel-rooms/<int:id>/details/", hostel_room_details, name="hostel-room-details"),
     path("new-hostel-room/", new_hostel_room, name="new-hostel-room"),
     path("delete-hostel-room/", delete_hostel_room, name="delete-hostel-room"),
+    path("add-student-to-room/", add_student_to_room, name="add-student-to-room"),
+    path("remove-student-from-room/", remove_student_from_room, name="remove-student-from-room"),
 ]

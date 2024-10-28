@@ -11,25 +11,19 @@
             </div>
             <div class="card-body">
                 <div class="mb-3">
-                    <i class="fas fa-building me-2"></i>
-                    <strong>Block:</strong> A Block
-                </div>
-                <div class="mb-3">
-                    <i class="fas fa-door-open me-2"></i>
-                    <strong>Room Type:</strong> 4-Seater
+                    <i class="fas fa-user-friends me-2"></i>
+                    <strong>Number of Rooms:</strong> {{hostel.rooms}}
                 </div>
                 <div class="mb-3">
                     <i class="fas fa-user-friends me-2"></i>
-                    <strong>Current Occupancy:</strong> 3/4
+                    <strong>Capacity:</strong> {{hostel.capacity}}
                 </div>
                 <div class="mb-3">
-                    <i class="fas fa-bed me-2"></i>
-                    <strong>Furniture:</strong> 4 Beds, 4 Desks
+                    <i class="fas fa-user-friends me-2"></i>
+                    <strong>Current Occupancy:</strong> 56%
                 </div>
-                <div class="mb-3">
-                    <i class="fas fa-temperature-high me-2"></i>
-                    <strong>AC:</strong> Yes
-                </div>
+                
+                
                 <div class="mb-3">
                     <i class="fas fa-broom me-2"></i>
                     <strong>Last Cleaned:</strong> 2024-10-26
@@ -57,42 +51,34 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {% for student in page_obj %}
                             <tr>
-                                <td>1</td>
-                                <td>John Smith</td>
-                                <td>Computer Science</td>
-                                <td>2024-08-01</td>
+                                <td>{{student.id}}</td>
+                                <td>{{student.user.name}}</td>
+                                <td>{{student.registration_number}}</td>
+                                <td>{{student.created_on}}</td>
                                 <td>
-                                    <button class="btn btn-sm btn-info me-1">
+                                    <a href="{% url 'student-details' student.id %}" class="btn btn-sm btn-info me-1">
                                         <i class="fas fa-eye"></i>
-                                    </button>
-                                    
+                                    </a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Mary Johnson</td>
-                                <td>Engineering</td>
-                                <td>2024-08-02</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info me-1">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>David Wilson</td>
-                                <td>Business</td>
-                                <td>2024-08-03</td>
-                                <td>
-                                    <button class="btn btn-sm btn-info me-1">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
+                    <div>
+                        <nav aria-label="Page navigation example">
+                          <ul class="pagination justify-content-end">
+                            {% if page_obj.has_previous %}   
+                              <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                            {% endif %}
+                            <a class="page-link" href="#">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</a>
+                            {% if page_obj.has_next %}    
+                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                            {% endif %}   
+                          </ul>
+                        </nav>
+                      </div>
                 </div>
             </div>
         </div>

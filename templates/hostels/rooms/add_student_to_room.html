@@ -1,0 +1,28 @@
+<div class="modal fade" id="addStudentModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title">Add Student Room: {{room.room_number}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{% url 'add-student-to-room' %}">
+                    {% csrf_token %}
+                    <input type="number" id="room_id" name="room_id" value="{{room.id}}" hidden readonly required />
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Select Student</label>
+                        <select class="form-select" id="student_id" name="student_id">
+                            {% for student in students %}
+                                <option value="{{student.id}}">{{student.registration_number}}: {{student.user.first_name}} {{student.user.last_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-warning">Add Student</button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</div>

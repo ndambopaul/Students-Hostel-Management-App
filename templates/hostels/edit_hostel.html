@@ -1,0 +1,60 @@
+<div class="modal fade" id="editHostelModal{{hostel.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 text-center">Edit Hostel Details</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+            <form action="{% url 'edit-hostel' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <input type="number" id="hostel_id" name="hostel_id" value="{{hostel.id}}" readonly required hidden />
+                  <div class="row mb-3">
+                <div class="col">
+                  <label for="exampleInputPassword1" class="form-label fw-bold">Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="name"
+                    name="name"
+                    value="{{hostel.name}}"
+                    required
+                  />
+                </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <label for="exampleInputPassword1" class="form-label fw-bold">Hostel Capacity</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="capacity"
+                      name="capacity"
+                      value="{{hostel.capacity}}"
+                      required
+                    />
+                  </div>    
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                      <label for="exampleInputPassword1" class="form-label fw-bold">Number of Rooms</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        id="rooms"
+                        name="rooms"
+                        value="{{hostel.rooms}}"
+                        required
+                      />
+                    </div>    
+                  </div>
+               
+                <div class="text-center mt-2">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+              </form>
+      </div>
+    </div>
+  </div>
