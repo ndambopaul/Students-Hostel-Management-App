@@ -104,17 +104,20 @@
 </div>
 <!-- Action Buttons -->
 <div class="action-buttons d-flex justify-content-center gap-3 mt-2">
+    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#declineBookingModal">
+        <i class="bi bi-check-circle me-2"></i>Decline Booking
+    </button>
     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#approveModal">
         <i class="bi bi-check-circle me-2"></i>Approve Booking
     </button>
 </div>
 
 <!-- Decline Modal -->
-<div class="modal fade" id="declineModal" tabindex="-1">
+<div class="modal fade" id="declineBookingModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-danger text-white">
-                <h5 class="modal-title">Decline Booking</h5>
+                <h5 class="modal-title">Reject Booking</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
@@ -143,10 +146,10 @@
             <form>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label class="form-label">Room Number</label>
-                        <select class="form-select">
+                        <select class="form-select" id="room_id" name="room_id">
+                            <option selected disabled value="">Select Room</option>
                             {% for room in rooms %}
-                            <option value="{{ room.room_number }}">{{ room.room_number }}: {{ room.hostel.name }}</option>
+                                <option value="{{room.id}}">{{room.room_number}}</option>
                             {% endfor %}
                         </select>
                     </div>

@@ -103,14 +103,23 @@ def hostel_bookings(request):
     paginator = Paginator(bookings, 10)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
+    
+    rooms = HostelRoom.objects.all()
 
-    context = {"page_obj": page_obj, "booking_statuses": BOOKING_STATUSES}
+    context = {
+        "page_obj": page_obj, 
+        "booking_statuses": BOOKING_STATUSES,
+        "rooms": rooms
+    }
     return render(request, "hostels/bookings/bookings.html", context)
 
 
 def booking_details(request, id):
     booking = Booking.objects.get(id=id)
-    context = {"booking": booking}
+    
+    rooms = HostelRoom.objects.all()
+    
+    context = {"booking": booking, "rooms": rooms}
     return render(request, "hostels/bookings/booking_details.html", context)
 
 

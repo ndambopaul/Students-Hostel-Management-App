@@ -1,0 +1,21 @@
+<div class="modal fade" id="checkinStudentModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title">Check-In Student</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <p>Are you sure you want to check-in <b>{{booking.first_name}} {{booking.last_name}}: {{booking.registration_number}}</b>?</p>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success">Confirm Check-In</button>
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+    </div>
+</div>
